@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import {Button} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
+import Material from "../components/Material";
 
 export function EditMaterial() {
   const navigate = useNavigate();
@@ -15,16 +16,8 @@ export function EditMaterial() {
         <i className="fa fa-plus-circle" style={{fontSize:'24px'}}></i>
       </div>
     <div className="mt-3">
-      <div className="d-flex flex-row justify-content-around align-items-center">
-        <div>Min <input type="text" className="m-1" style={{width:'50%'}} /></div>
-        <div>Price <input type="text" className="m-1" style={{width:'50%'}} /></div>
-        <i className="fa fa-close text-danger" style={{fontSize:24}}></i>
-      </div>
-      <div className="d-flex flex-row justify-content-around align-items-center">
-        <div>Min <input type="text" className="m-1" style={{width:'50%'}} /></div>
-        <div>Price <input type="text" className="m-1" style={{width:'50%'}} /></div>
-        <i className="fa fa-close text-danger" style={{fontSize:24}}></i>
-      </div>
+      <Material mini={0} prices={0}/>
+      <Material mini={0} prices={0}/>
     </div>
     </div>
 
@@ -34,16 +27,8 @@ export function EditMaterial() {
         <i className="fa fa-plus-circle" style={{fontSize:'24px'}}></i>
       </div>
     <div className="mt-3">
-      <div className="d-flex flex-row justify-content-around align-items-center">
-        <div>Min <input type="number" className="m-1" style={{width:'50%'}} /></div>
-        <div>Price <input type="number" className="m-1" style={{width:'50%'}} /></div>
-        <i className="fa fa-close text-danger" style={{fontSize:24}}></i>
-      </div>
-      <div className="d-flex flex-row justify-content-around align-items-center">
-        <div>Min <input type="text" className="m-1" style={{width:'50%'}} /></div>
-        <div>Price <input type="text" className="m-1" style={{width:'50%'}} /></div>
-        <i className="fa fa-close text-danger" style={{fontSize:24}}></i>
-      </div>
+    <Material mini={0} prices={0}/>
+    <Material mini={0} prices={0}/>
     </div>
     </div>
     <div className="d-flex flex-row justify-content-between py-3">

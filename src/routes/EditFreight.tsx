@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import Header from "../components/Header";
 import {Button} from 'react-bootstrap'
 import {useNavigate} from 'react-router-dom'
@@ -6,50 +5,7 @@ import Freight from '../components/Freight';
 
 
 export function EditFreight() {
-    
-  const [min,setMin]=useState<number>(0);
-  const [max,setMax]=useState<number>(0);
-  const [price,setPrice]=useState<number>(0);
   const navigate = useNavigate();
-  const updateMin=(a:number)=>{
-      console.log(a)
-      if(isNaN(a)){
-        console.log(a)
-          setMin(0);
-      }else if(a>=0){
-        setMin(a);
-    }
-  }
-
-  const updateMax=(a:number)=>{
-    console.log(a)
-    if(isNaN(a)){
-      console.log(a)
-        setMax(0);
-    }else if(a>=0){
-      setMax(a);
-  }
-}
-
-const updatePrice=(a:number)=>{
-    if(a>=0){
-        var temp = a.toFixed(3)
-        var second = a.toString().split('.');
-        console.log(second);
-        if(second.length==2){
-            if(second[1].length<=3){
-                
-                console.log(temp);
-                setPrice(parseFloat(temp))
-            }
-        }else{
-            setPrice(parseFloat(temp))
-        }
-    }else{
-        setPrice(0)
-    }
-}
-
   return (
     <>
         <Header/>
