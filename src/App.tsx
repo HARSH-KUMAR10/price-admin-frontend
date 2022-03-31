@@ -15,13 +15,13 @@ function App() {
       <Container fluid>
         <MemoryRouter>
           <Routes >
-            <Route path="/" element={<EditFreight />} />
+            <Route path="/freight" element={<EditFreight />} />
             <Route path="/material" element={<EditMaterial />} />
             <Route path="/machine/2" element={<EditMachine />} />
             <Route path="/machine" element={<ListMachines />} />
             <Route path="/overview" element={<Overview />} />
             <Route path="/view" element={<EditView />} />
-            <Route path="/f" element={<Login />} />
+            <Route path="/" element={<Login />} />
           </Routes >
         </MemoryRouter>
       </Container>
