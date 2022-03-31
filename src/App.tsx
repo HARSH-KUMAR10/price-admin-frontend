@@ -5,6 +5,7 @@ import EditFreight from './routes/EditFreight';
 import EditMachine from './routes/EditMachine';
 import EditMaterial from './routes/EditMaterial';
 import ListMachines from './routes/ListMachines';
+import EditView from './routes/EditView';
 import Login from './routes/Login';
 import Overview from './routes/Overview';
 
@@ -18,8 +19,9 @@ function App() {
             <Route path="/material" element={<EditMaterial />} />
             <Route path="/machine/:id" element={<EditMachine />} />
             <Route path="/machine" element={<ListMachines />} />
-            <Route path="/" element={<Overview />} />
-            <Route path="/overview" element={<Login />} />
+            <Route path="/overview" element={<Overview />} />
+            <Route path="/" element={<EditView />} />
+            <Route path="/login" element={<Login />} />
           </Routes >
         </MemoryRouter>
       </Container>
