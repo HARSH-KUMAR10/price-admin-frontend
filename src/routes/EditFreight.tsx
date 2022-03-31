@@ -1,9 +1,55 @@
+import {useState} from 'react';
 import Header from "../components/Header";
 import {Button} from 'react-bootstrap'
 import {useNavigate} from 'react-router-dom'
+import Freight from '../components/Freight';
+
 
 export function EditFreight() {
+    
+  const [min,setMin]=useState<number>(0);
+  const [max,setMax]=useState<number>(0);
+  const [price,setPrice]=useState<number>(0);
   const navigate = useNavigate();
+  const updateMin=(a:number)=>{
+      console.log(a)
+      if(isNaN(a)){
+        console.log(a)
+          setMin(0);
+      }else if(a>=0){
+        setMin(a);
+    }
+  }
+
+  const updateMax=(a:number)=>{
+    console.log(a)
+    if(isNaN(a)){
+      console.log(a)
+        setMax(0);
+    }else if(a>=0){
+      setMax(a);
+  }
+}
+
+const updatePrice=(a:number)=>{
+    if(a>=0){
+        var temp = a.toFixed(3)
+        var second = a.toString().split('.');
+        console.log(second);
+        if(second.length==2){
+            if(second[1].length<=3){
+                
+                console.log(temp);
+                setPrice(parseFloat(temp))
+            }
+        }else{
+            setPrice(parseFloat(temp))
+        }
+    }else{
+        setPrice(0)
+    }
+}
+
   return (
     <>
         <Header/>
@@ -14,11 +60,7 @@ export function EditFreight() {
                     <span className="h2">Q1</span>
                     <i className="fa fa-plus-circle" style={{fontSize:'24px'}}></i>
                 </div>
-                <div className="mt-2 d-flex flex-row justify-content-around">
-                    <div>Min <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                    <div>Max <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                    <div>Price <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                </div>
+                <Freight mini={0} maxi={0} prices={0} cross={false}/>
             </div>
             <div className="border p-2 mx-auto">
                 <div className="d-flex flex-row justify-content-between align-items-center">
@@ -26,18 +68,8 @@ export function EditFreight() {
                     <i className="fa fa-plus-circle" style={{fontSize:'24px'}}></i>
                 </div>
                 <div className="mt-3">
-                    <div className="d-flex flex-row justify-content-around align-items-center">
-                    <div>Min <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                    <div>Max <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                    <div>Price <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                    <i className="fa fa-close text-danger" style={{fontSize:24}}></i>
-                    </div>
-                    <div className="d-flex flex-row justify-content-around align-items-center">
-                    <div>Min <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                    <div>Max <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                    <div>Price <input type="text" className="m-1" style={{width:'50%'}} placeholder="Set-Entry"/></div>
-                    <i className="fa fa-close text-danger" style={{fontSize:24}}></i>
-                    </div>
+                    <Freight mini={0} maxi={0} prices={0} cross={true}/>
+                    <Freight mini={0} maxi={0} prices={0} cross={true}/>
                 </div>
             </div>
             <div className="d-flex flex-row justify-content-between py-3">

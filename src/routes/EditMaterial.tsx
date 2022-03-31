@@ -35,8 +35,8 @@ export function EditMaterial() {
       </div>
     <div className="mt-3">
       <div className="d-flex flex-row justify-content-around align-items-center">
-        <div>Min <input type="text" className="m-1" style={{width:'50%'}} /></div>
-        <div>Price <input type="text" className="m-1" style={{width:'50%'}} /></div>
+        <div>Min <input type="number" className="m-1" style={{width:'50%'}} /></div>
+        <div>Price <input type="number" className="m-1" style={{width:'50%'}} /></div>
         <i className="fa fa-close text-danger" style={{fontSize:24}}></i>
       </div>
       <div className="d-flex flex-row justify-content-around align-items-center">
