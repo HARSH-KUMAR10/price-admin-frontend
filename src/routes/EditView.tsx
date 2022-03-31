@@ -1,7 +1,9 @@
 import Header from "../components/Header";
-import {Container,Button} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 
 function EditView(){
+    const navigate=useNavigate();
     return(
         <>
         <Header/>
@@ -33,7 +35,7 @@ function EditView(){
                 </div>
             </div>
             <div className="d-flex flex-row justify-content-between py-3">
-                <Button variant="light" className='border shadow'>Close</Button>
+                <Button variant="light" className='border shadow' onClick={()=>navigate('/overview')}>Close</Button>
                 <Button variant="light" className='border shadow'>Save</Button>
             </div>
         </div>
