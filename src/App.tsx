@@ -15,8 +15,8 @@ function App() {
       <Container fluid>
         <MemoryRouter>
           <Routes >
-            <Route path="/freight" element={<EditFreight />} />
-            <Route path="/" element={<EditMaterial />} />
+            <Route path="/" element={<EditFreight />} />
+            <Route path="/material" element={<EditMaterial />} />
             <Route path="/machine/:id" element={<EditMachine />} />
             <Route path="/machine" element={<ListMachines />} />
             <Route path="/overview" element={<Overview />} />

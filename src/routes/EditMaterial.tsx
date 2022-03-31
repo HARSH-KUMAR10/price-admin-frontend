@@ -6,7 +6,7 @@ export function EditMaterial() {
   return (
     <>
     <Header/>
-    <div className="text-center mx-auto container">
+    <div className="text-center mx-auto container" style={{maxWidth:500}}>
     <div className="display-6 text-center p-3">Edit Material</div>
     <div className="border p-2 mx-auto">
       <div className="d-flex flex-row justify-content-between align-items-center">
