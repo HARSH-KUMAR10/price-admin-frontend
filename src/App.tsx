@@ -16,11 +16,11 @@ function App() {
         <MemoryRouter>
           <Routes >
             <Route path="/freight" element={<EditFreight />} />
-            <Route path="/material" element={<EditMaterial />} />
+            <Route path="/" element={<EditMaterial />} />
             <Route path="/machine/:id" element={<EditMachine />} />
             <Route path="/machine" element={<ListMachines />} />
             <Route path="/overview" element={<Overview />} />
-            <Route path="/" element={<EditView />} />
+            <Route path="/view" element={<EditView />} />
             <Route path="/login" element={<Login />} />
           </Routes >
         </MemoryRouter>

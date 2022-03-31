@@ -5,7 +5,7 @@ function EditView(){
     return(
         <>
         <Header/>
-        <div className="text-center mx-auto w-50">
+        <div className="text-center mx-auto container">
             <div className="display-6 text-center p-3">Edit View Basics</div>
             <div className="border p-2 mb-4">
                 <div className="d-flex flex-row justify-content-between align-items-center">
@@ -33,8 +33,8 @@ function EditView(){
                 </div>
             </div>
             <div className="d-flex flex-row justify-content-between py-3">
-                <Button>Close</Button>
-                <Button>Save</Button>
+                <Button variant="light" className='border shadow'>Close</Button>
+                <Button variant="light" className='border shadow'>Save</Button>
             </div>
         </div>
 
