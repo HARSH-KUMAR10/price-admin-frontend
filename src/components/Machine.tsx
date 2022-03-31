@@ -72,20 +72,20 @@ function Machine(props:values){
         </div>
         <div className='col-12 col-md-6'>
         <div className="row">
-            <div className='col-12 col-md-8'>
+            <div className='col-12 col-md-10'>
                 <div className="row">
                     <div className='col-12 col-md-6 p-1'><input type="checkbox" /> Add Purchase Price</div>
                     <div className='col-12 col-md-6 p-1'><input type="checkbox" /> Add Purchase Price</div>
                 </div>
             </div>
-            <div className='col-12 col-md-4'>
+            <div className='col-12 col-md-2'>
                 <i className="fa fa-close text-danger col-12 col-md-4" style={{fontSize:24}}></i>
             </div>
         </div>
         </div>
       </div>
 
-      <div className='text-center row my-2 align-items-baseline'>
+      <div className='text-center row my-2 mx-0 align-items-baseline'>
         <div className='col-12 col-md-6'>
             <div className="row">
             <div className="col-12 col-md-6 p-1">Max <input type="number" value={max} onChange={(evt)=>updateInt(parseInt(evt.target.value),'max')} style={{width:'50%'}} /></div>
