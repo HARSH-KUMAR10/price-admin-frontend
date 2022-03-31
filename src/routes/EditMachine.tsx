@@ -8,7 +8,7 @@ export function EditMachine() {
   return (
     <>
     <Header/>
-    <div className="mx-auto container mw-1000">
+    <div className="mx-auto container mw-1000 my-3">
     <div className="display-6 text-center p-3">Edit Machine</div>
 
     <div className=" border p-2 mx-auto">
@@ -25,10 +25,11 @@ export function EditMachine() {
     </div>
 
     </div>
-    <div className='d-flex flex-row p-2'>
-      <Button onClick={()=>navigate('/machine')} variant="light" className='border shadow' >back</Button>
+    <div className='row justify-content-between'>
+      <Button onClick={()=>navigate('/machine')} variant="light" className='col-11 border shadow m-2 col-md-1' >back</Button>
+      <Button variant="light" className='border shadow m-2 col-11 col-md-1'>Save</Button>
     </div>
-
+    <br /><br />
     </div>
     </>
   );
