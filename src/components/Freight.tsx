@@ -53,7 +53,6 @@ function Freight(props:numbers){
             <div>Min <input type="number" value={min} onChange={(evt)=>{updateMin(parseInt(evt.target.value))}}  className="m-1" style={{width:'50%'}} /></div>
             <div>Max <input type="number" value={max} onChange={(evt)=>{updateMax(parseInt(evt.target.value))}} className="m-1" style={{width:'50%'}} /></div>
             <div>Price <input type="number" value={price} onChange={(evt)=>{updatePrice(parseFloat(evt.target.value))}} className="m-1" style={{width:'50%'}} /></div>
-            {props.cross?(<><i className="fa fa-close text-danger" style={{fontSize:24}}></i></>):(<></>)}
         </div>
     )
 }

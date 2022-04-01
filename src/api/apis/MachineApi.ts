@@ -41,6 +41,8 @@ export class MachineApi extends runtime.BaseAPI {
     async machineGetRaw(requestParameters: MachineGetRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<MachineDetailDTO>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling machineGet.');
+        }else{
+            console.log(requestParameters)
         }
 
         const queryParameters: any = {};
@@ -53,6 +55,7 @@ export class MachineApi extends runtime.BaseAPI {
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
+        console.log(`respone:`,response)
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MachineDetailDTOFromJSON(jsonValue));
     }
@@ -108,7 +111,6 @@ export class MachineApi extends runtime.BaseAPI {
             query: queryParameters,
             body: MachineDetailDTOToJSON(requestParameters.model),
         }, initOverrides);
-
         return new runtime.JSONApiResponse<any>(response);
     }
 
