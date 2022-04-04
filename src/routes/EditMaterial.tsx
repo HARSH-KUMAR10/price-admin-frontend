@@ -60,6 +60,33 @@ export function EditMaterial() {
       });
   }, []);
 
+  const handleUpdateField = (args: any) => {
+    console.log(args);
+
+    const { Pid: changePid, Cid: changeCid, type, value } = args;
+
+    pArr &&
+      pArr.forEach((curr, Pid) => {
+        if (Pid === changePid) {
+          curr.forEach((ind: any, Cid: any) => {
+            if (Cid === changeCid) {
+              if (type === "minimum" || type === "maximum") {
+                console.log(ind.totalAreaSquareMeterBounds[type], value);
+
+                ind.totalAreaSquareMeterBounds[type] = value;
+              } else {
+                console.log(ind[type], value);
+
+                ind[type] = value;
+              }
+            }
+          });
+        }
+      });
+
+    console.log(pArr);
+  };
+
   const handleAddItem = (Pid: number) => {
     let newArr: Array<any> = [];
     pArr && newArr.push(...pArr);
@@ -67,7 +94,7 @@ export function EditMaterial() {
     let varObj: MaterialDTO = {
       minimalTotalAreaInSquareMeters: 0,
       price: 0,
-      prowellName: "",
+      prowellName: `ProwellName ${Pid+1}`,
     };
 
     newArr[Pid].push(varObj);
@@ -106,11 +133,10 @@ export function EditMaterial() {
       .materialUpdate({ model: tempArr })
       .then((res) => {
         console.log(res);
-        navigate('/overview')
+        navigate("/overview");
       })
       .catch((err) => console.log(err));
   };
-
 
   return (
     <>
@@ -130,11 +156,14 @@ export function EditMaterial() {
               </div>
               <div className="mt-3">
                 {curr.map((ind: any, cid: any) => (
-                  <div className='d-flex flex-row justify-content-around align-items-center'>
+                  <div className="d-flex flex-row justify-content-around align-items-center">
                     <Material
                       mini={ind.minimalTotalAreaInSquareMeters}
                       prices={ind.price}
-                      key={UID+cid}
+                      key={UID + cid}
+                      handleUpdateField={handleUpdateField}
+                      Pid={pid}
+                      Cid={cid}
                     />
 
                     {curr.length > 1 && (
@@ -158,7 +187,11 @@ export function EditMaterial() {
           >
             Cancel
           </Button>
-          <Button variant="light" className="border shadow" onClick={handleSave}>
+          <Button
+            variant="light"
+            className="border shadow"
+            onClick={handleSave}
+          >
             Save
           </Button>
         </div>

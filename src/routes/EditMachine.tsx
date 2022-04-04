@@ -7,14 +7,18 @@ import { MachineDetailDTO } from "../api/models/MachineDetailDTO";
 import { MachineApi } from "../api";
 import { getApiConfiguration } from "../apiConfiguration";
 import { ProductionPriceDTO } from "../api/models/ProductionPriceDTO";
-import { Bounds } from "../api/models/Bounds";
-import { PrintColorCharge } from "../api/models/PrintColorCharge";
 
 export function EditMachine() {
   const navigate = useNavigate();
   const [machine, setMachine] = useState<MachineDetailDTO>();
   const [UID, setUID] = useState<number>(0);
+
+  const [BgRed, setBgRed] = useState<Array<any>>([])
+
+  var bgColorRed: Array<any> = [];
+
   useEffect(() => {
+
     let id: string = localStorage.getItem("Machine_Id") || "";
     console.log(id);
     const api = new MachineApi(getApiConfiguration());
@@ -30,17 +34,57 @@ export function EditMachine() {
         };
 
         setMachine(machineObj);
+
+        for(var j = 1;j<response.productionPrices.length;j++) {
+
+          let max = 0 ;
+          let min = 0 ;
+
+           max = response.productionPrices[j - 1].totalAreaSquareMeterBounds.maximum!;
+           min =  response.productionPrices[j].totalAreaSquareMeterBounds.minimum!;
+
+          if(max >= min){
+            bgColorRed.push({cid : j-1,toColor:true})
+            bgColorRed.push({cid : j,toColor:true})
+          }
+        }
+
+        setBgRed(bgColorRed)
+
+        bgColorRed.map((curr) => console.log(curr))
+
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
+  const handleUpdateField = (args: any) => {
+    console.log(args);
+
+    const { Cid: changeCid, type, value } = args;
+
+    machine &&
+      machine.productionPrices.map((curr: any, Cid: any) => {
+        if (Cid === changeCid) {
+          if (type === "minimum" || type === "maximum") {
+            console.log(curr.totalAreaSquareMeterBounds[type], value);
+
+            curr.totalAreaSquareMeterBounds[type] = value;
+          } else {
+            curr[type] = value;
+          }
+        }
+      });
+
+    console.log(machine);
+  };
+
   const handleRemoveItem = (Cid: number) => {
     if (machine) {
       var newArr: MachineDetailDTO = {
-        name : machine.name,
-        productionPrices : []
+        name: machine.name,
+        productionPrices: [],
       };
 
       // newArr["productionPrices"] = []
@@ -64,14 +108,18 @@ export function EditMachine() {
   };
 
   const handleAddItem = () => {
-    let newArr: MachineDetailDTO ;
+    let newArr: MachineDetailDTO;
 
     if (machine) {
       newArr = machine;
       console.log(machine.productionPrices[0].printColorCharges.length);
-      var tempColor=[]
-      for(var i=0;i<machine.productionPrices[0].printColorCharges.length;i++){
-        tempColor.push({count:i,price:0});
+      var tempColor = [];
+      for (
+        var i = 0;
+        i < machine.productionPrices[0].printColorCharges.length;
+        i++
+      ) {
+        tempColor.push({ count: i, price: 0 });
       }
       let varObj: ProductionPriceDTO = {
         totalAreaSquareMeterBounds: {
@@ -87,35 +135,34 @@ export function EditMachine() {
 
       newArr.productionPrices.unshift(varObj);
 
-      console.log(newArr.productionPrices)
+      console.log(newArr.productionPrices);
 
       setMachine(newArr);
-      setUID(UID+1)
-
+      setUID(UID + 1);
     }
   };
 
   const handleSave = () => {
-    if(machine){
+    if (machine) {
       var tempArr: MachineDetailDTO = {
-        name : machine.name,
-        productionPrices : []
+        name: machine.name,
+        productionPrices: [],
       };
-      console.log('before:',machine)
+      console.log("before:", machine);
       machine &&
         machine.productionPrices.map((curr) => {
-            tempArr.productionPrices.push(curr);
+          tempArr.productionPrices.push(curr);
         });
-  
+
       const api = new MachineApi(getApiConfiguration());
       api
         .machineUpdate({ model: tempArr })
         .then((res) => {
           console.log(res);
-          // navigate('/overview')
+          navigate('/overview')
         })
-        .catch((err) => console.log(err));    
-      }
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -156,6 +203,9 @@ export function EditMachine() {
                     addFreightPrice={curr && curr.addFreightPrice}
                     addPurchasePrice={curr && curr.addPurchasePrice}
                     key={cid + UID}
+                    handleUpdateField={handleUpdateField}
+                    Cid={cid}
+                    bgColorRed={BgRed}
                   />
                   <div>
                     <i
@@ -174,9 +224,13 @@ export function EditMachine() {
             variant="light"
             className="col-11 border shadow m-2 col-md-1"
           >
-            back
+            Cancel
           </Button>
-          <Button variant="light" className="border shadow m-2 col-11 col-md-1" onClick={handleSave}>
+          <Button
+            variant="light"
+            className="border shadow m-2 col-11 col-md-1"
+            onClick={handleSave}
+          >
             Save
           </Button>
         </div>

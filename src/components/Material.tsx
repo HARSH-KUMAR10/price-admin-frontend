@@ -3,9 +3,12 @@ import {useState} from 'react';
 interface numbers{
     mini:number,
     prices:number,
+    handleUpdateField : (args:any) => any,
+    Pid:number,
+    Cid: number
 }
 
-function Material(props:numbers){
+const Material : React.FC<numbers> =  (props:numbers) =>{
     
   const [min,setMin]=useState<number>(props.mini);
   const [price,setPrice]=useState<number>(props.prices);
@@ -14,8 +17,12 @@ function Material(props:numbers){
         if(isNaN(a)){
           console.log(a)
             setMin(0);
+            props.handleUpdateField({type : 'minimalTotalAreaInSquareMeters',value : 0,Pid : props.Pid,Cid : props.Cid});
+
         }else if(a>=0){
           setMin(a);
+          props.handleUpdateField({type : 'minimalTotalAreaInSquareMeters',value : a,Pid : props.Pid,Cid : props.Cid});
+
       }
     }
     const updatePrice=(a:number)=>{
@@ -28,12 +35,18 @@ function Material(props:numbers){
                     
                     console.log(temp);
                     setPrice(parseFloat(temp))
+                    props.handleUpdateField({type : 'price',value : parseFloat(temp),Pid : props.Pid,Cid : props.Cid});
+
                 }
             }else{
                 setPrice(parseFloat(temp))
+                props.handleUpdateField({type : 'price',value : parseFloat(temp),Pid : props.Pid,Cid : props.Cid});
+
             }
         }else{
             setPrice(0)
+            props.handleUpdateField({type : 'price',value : 0,Pid : props.Pid,Cid : props.Cid});
+
         }
     }
     return(
